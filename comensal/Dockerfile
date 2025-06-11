@@ -4,6 +4,8 @@ WORKDIR /app
 
 COPY . .
 
+# Asegura que se instalen devDependencies como vite
+ENV NODE_ENV=development
 RUN npm install
 
 RUN npm run build
