@@ -1,0 +1,31 @@
+.menu-container {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  margin: 2rem auto;
+  font-family: sans-serif;
+}
+
+.menu-item {
+  border: 1px solid #ccc;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background 0.3s;
+  background: #f9f9f9;
+}
+
+.menu-item:hover {
+  background: #f0f0f0;
+}
+
+.menu-item.activo {
+  background: #e0f7fa;
+  border-color: #00bcd4;
+}
+
+.contenido {
+  margin-top: 0.5rem;
+  color: #333;
+}
