@@ -12,27 +12,39 @@ const Pedidos = () => {
   const [pedidos, setPedidos] = useState([]);
 
   useEffect(() => {
+    const handleMessage = (topic, message) => {
+      const data = JSON.parse(message.toString());
+  
+      if (topic === 'nuevo/pedido') {
+        const pedido = { ...data, estado: data.estado || 'Recibido' };
+  
+        setPedidos(prev => {
+          const existe = prev.find(p => p.id === pedido.id);
+          if (existe) return prev; // ya existe, no duplicar
+          return [...prev, pedido];
+        });
+      }
+  
+      if (topic === 'ordenes/status/mesa1') {
+        const { id, estado } = data;
+        setPedidos(prev =>
+          prev.map(p => (p.id === id ? { ...p, estado } : p))
+        );
+      }
+    };
+  
     mqttClient.on('connect', () => {
       console.log('👨‍🍳 Cocina conectada a MQTT');
-      mqttClient.subscribe('nuevo/pedido', (err) => {
-        if (!err) {
-          console.log('📥 Suscrita a nuevo/pedido');
-        }
-      });
+      mqttClient.subscribe('nuevo/pedido');
+      mqttClient.subscribe('ordenes/status/mesa1');
     });
-
-    mqttClient.on('message', (topic, message) => {
-        if (topic === 'nuevo/pedido') {
-            const pedido = JSON.parse(message.toString());
-          
-            const estadoInicial = pedido.estado || 'Recibido'; // solo si no viene definido
-            const pedidoConEstado = { ...pedido, estado: estadoInicial };
-          
-            console.log('🆕 Pedido recibido:', pedidoConEstado);
-            setPedidos(prev => [...prev, pedidoConEstado]);
-          }          
-      });      
-  }, []);
+  
+    mqttClient.on('message', handleMessage);
+  
+    return () => {
+      mqttClient.off('message', handleMessage); // muy importante para evitar múltiples handlers
+    };
+  }, []);  
 
   return (
     <div style={{

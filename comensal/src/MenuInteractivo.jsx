@@ -387,7 +387,8 @@ const MenuInteractivo = () => {
       fontSize: '24px'
     },
     cartItemName: {
-      fontWeight: 'bold'
+      fontWeight: 'bold',
+      color: '#374151'  // Agregado: gris oscuro para contraste
     },
     cartItemPrice: {
       color: '#dc2626',
@@ -494,8 +495,9 @@ const MenuInteractivo = () => {
       marginBottom: '12px',
       display: 'flex',
       alignItems: 'center',
-      gap: '8px'
-    },
+      gap: '8px',
+      color: '#374151' // Agregado: gris oscuro para encabezado visible
+    },    
     orderItem: {
       display: 'flex',
       justifyContent: 'space-between',
@@ -513,8 +515,9 @@ const MenuInteractivo = () => {
       flexDirection: 'column'
     },
     orderItemName: {
-      fontWeight: '500'
-    },
+      fontWeight: '500',
+      color: '#374151' // Agregado: texto de nombre visible en confirmación
+    },    
     orderItemQuantity: {
       fontSize: '14px',
       color: '#6b7280'
@@ -533,8 +536,9 @@ const MenuInteractivo = () => {
       justifyContent: 'space-between',
       alignItems: 'center',
       fontSize: '20px',
-      fontWeight: 'bold'
-    },
+      fontWeight: 'bold',
+      color: '#374151' // 🔧 Añadido: texto visible (gris oscuro)
+    },    
     orderTotalAmount: {
       color: '#dc2626'
     },
@@ -551,8 +555,9 @@ const MenuInteractivo = () => {
       marginBottom: '8px'
     },
     timeEstimateTitle: {
-      fontWeight: 'bold'
-    },
+      fontWeight: 'bold',
+      color: '#374151' // 🔧 Añadido: mejor contraste
+    },    
     timeEstimateText: {
       fontSize: '14px',
       color: '#6b7280'

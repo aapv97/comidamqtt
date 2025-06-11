@@ -1,52 +1,55 @@
 .tarjeta-pedido {
-    background-color: #f0f0f0;
-    border-radius: 8px;
-    padding: 1rem;
-    margin: 1rem;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    max-width: 300px;
-  }
-  
-  .tarjeta-pedido h3 {
-    margin: 0 0 0.5rem 0;
-  }
-  
-  .tarjeta-pedido ul {
-    padding-left: 1rem;
-    margin-bottom: 1rem;
-  }
-  
-  .btn-estado {
-    padding: 0.5rem 1rem;
-    border: none;
-    font-weight: bold;
-    cursor: pointer;
-    border-radius: 5px;
-    transition: background-color 0.3s;
-  }
-  
-  .estado-Recibido {
-    background-color: #cfcfcf;
-  }
-  
-  .estado-Enpreparación {
-    background-color: #f5a623;
-    color: white;
-  }
-  
-  .estado-Completado {
-    background-color: #4caf50;
-    color: white;
-  }
-  
-  .estado-Entregado {
-    background-color: #2196f3;
-    color: white;
-  }
-  
-  .entregado-msg {
-    font-weight: bold;
-    color: #4caf50;
-    margin-top: 0.5rem;
-  }
-  
+  background-color: #f0f0f0;
+  border-radius: 8px;
+  padding: 1rem;
+  margin: 1rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  max-width: 300px;
+  color: #111827; /* ⬅️ Texto oscuro para contraste */
+}
+
+.tarjeta-pedido h3 {
+  margin: 0 0 0.5rem 0;
+  color: #111827; /* ⬅️ Título más visible */
+}
+
+.tarjeta-pedido ul {
+  padding-left: 1rem;
+  margin-bottom: 1rem;
+  color: #1f2937; /* ⬅️ Color de texto para los productos */
+}
+
+.btn-estado {
+  padding: 0.5rem 1rem;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+  color: #56bfd2; /* Asegura visibilidad del texto */
+}
+
+.estado-Recibido {
+  background-color: #cfcfcf;
+}
+
+.estado-Enpreparación {
+  background-color: #f5a623;
+  color: white;
+}
+
+.estado-Completado {
+  background-color: #10b981; /* Verde esmeralda */
+  color: white;
+}
+
+.estado-Entregado {
+  background-color: #2196f3;
+  color: white;
+}
+
+.entregado-msg {
+  font-weight: bold;
+  color: #111827; /* ⬅️ Cambiado de verde a gris oscuro */
+  margin-top: 0.5rem;
+}
