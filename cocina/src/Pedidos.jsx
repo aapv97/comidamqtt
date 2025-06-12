@@ -20,7 +20,7 @@ const Pedidos = () => {
   
         setPedidos(prev => {
           const existe = prev.find(p => p.id === pedido.id);
-          if (existe) return prev; // ya existe, no duplicar
+          if (existe) return prev;
           return [...prev, pedido];
         });
       }
@@ -42,7 +42,7 @@ const Pedidos = () => {
     mqttClient.on('message', handleMessage);
   
     return () => {
-      mqttClient.off('message', handleMessage); // muy importante para evitar múltiples handlers
+      mqttClient.off('message', handleMessage);
     };
   }, []);  
 

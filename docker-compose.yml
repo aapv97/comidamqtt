@@ -2,11 +2,12 @@ version: '3.8'
 
 services:
 
+  #  Base de datos MySQL
   mysql:
     image: mysql:5.7
     container_name: mysql
     ports:
-      - "3307:3306"
+      - "3307:3306"  # Puerto local 3307 , Puerto interno del contenedor 3306
     environment:
       MYSQL_ROOT_PASSWORD: "comida_password"
       MYSQL_DATABASE: comidamqtt
@@ -18,30 +19,32 @@ services:
     networks:
       - redcomida
 
+  # Broker MQTT
   mqtt:
     image: eclipse-mosquitto
     container_name: mqtt-broker
     ports:
-      - "1883:1883"
-      - "9002:9002"
+      - "1883:1883"  # Puerto MQTT
+      - "9002:9002"  # Puerto WebSockets (para frontend)
     volumes:
       - ./mqtt/mosquitto.conf:/mosquitto/config/mosquitto.conf
     networks:
       - redcomida
 
+  # Backend Node.js con Express y MQTT
   backend:
     build:
-      context: ./backend
+      context: ./backend  # Ruta donde del Dockerfile
     container_name: backend
     depends_on:
-      - mysql
-      - mqtt
+      - mysql  # Espera a que MySQL esté disponible
+      - mqtt   # Espera a que Mosquitto esté listo
     working_dir: /app
-    command: ["./espera-mysql.sh", "node", "server.js"]
+    command: ["./espera-mysql.sh", "node", "server.js"]  # Script de espera + inicio del servidor
     volumes:
       - ./backend:/app
     ports:
-      - "3001:3000"
+      - "3001:3000"  # Puerto local 3001 → Puerto interno 3000 del backend
     networks:
       - redcomida
     environment:
@@ -52,28 +55,31 @@ services:
       - DB_PASSWORD=password
       - DB_NAME=comidamqtt
 
+  # Frontend: Cocina (React/Vite)
   cocina:
     build:
       context: ./cocina
     container_name: cocina
     depends_on:
-      - backend
+      - backend  # Espera a que el backend esté listo antes de iniciar
     ports:
-      - "5174:4173"  # puerto externo 5174 → puerto interno Vite 4173
+      - "5174:4173"  # Puerto externo 5174 , puerto interno Vite 4173
     networks:
       - redcomida
 
+  # Frontend: Comensal (React/Vite)
   comensal:
     build:
       context: ./comensal
     container_name: comensal
     depends_on:
-      - backend
+      - backend  # Espera a que el backend esté listo antes de iniciar
     ports:
-      - "5173:4173"  # puerto externo 5173 → puerto interno Vite 4173
+      - "5173:4173"  # Puerto externo 5173 , puerto interno Vite 4173
     networks:
       - redcomida
 
+# Red compartida para que todos los servicios se comuniquen entre sí por nombre
 networks:
   redcomida:
     driver: bridge

@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { ShoppingCart, Plus, Minus, Clock, Star, Users, ChefHat } from 'lucide-react';
-// import client from './mqttClient';
 import { enviarPedido, escucharEstado } from './mqttClient';
-import EstadoPedido from './components/EstadoPedido'; // al principio del archivo
+import EstadoPedido from './components/EstadoPedido';
 
 
 const MenuInteractivo = () => {
@@ -87,7 +86,7 @@ const MenuInteractivo = () => {
   const confirmarOrden = () => {
     const pedido = {
       id: 'mesa1',
-      estado: 'Recibido', // 👈 AÑADE ESTA LÍNEA
+      estado: 'Recibido',
       productos: carrito.map(item => ({
         nombre: item.nombre,
         cantidad: item.cantidad,
@@ -95,9 +94,9 @@ const MenuInteractivo = () => {
       }))
     };     
   
-    setEstadoPedido(null); // Limpiar estado previo
-    enviarPedido(pedido); // 📤 Enviar por MQTT
-    setMostrarConfirmacion(true); // Mostrar confirmación
+    setEstadoPedido(null);
+    enviarPedido(pedido);
+    setMostrarConfirmacion(true);
   
     escucharEstado((estado) => {
       if (estado?.estado) {
@@ -111,7 +110,7 @@ const MenuInteractivo = () => {
     setCarrito([]);
     setMostrarCarrito(false);
     setMostrarConfirmacion(false);
-    setEstadoPedido(null); // 🧽 Limpiar estado al iniciar nueva orden
+    setEstadoPedido(null);
   };  
 
   const styles = {
@@ -388,7 +387,7 @@ const MenuInteractivo = () => {
     },
     cartItemName: {
       fontWeight: 'bold',
-      color: '#374151'  // Agregado: gris oscuro para contraste
+      color: '#374151'
     },
     cartItemPrice: {
       color: '#dc2626',
@@ -496,7 +495,7 @@ const MenuInteractivo = () => {
       display: 'flex',
       alignItems: 'center',
       gap: '8px',
-      color: '#374151' // Agregado: gris oscuro para encabezado visible
+      color: '#374151'
     },    
     orderItem: {
       display: 'flex',
@@ -516,7 +515,7 @@ const MenuInteractivo = () => {
     },
     orderItemName: {
       fontWeight: '500',
-      color: '#374151' // Agregado: texto de nombre visible en confirmación
+      color: '#374151'
     },    
     orderItemQuantity: {
       fontSize: '14px',
@@ -537,7 +536,7 @@ const MenuInteractivo = () => {
       alignItems: 'center',
       fontSize: '20px',
       fontWeight: 'bold',
-      color: '#374151' // 🔧 Añadido: texto visible (gris oscuro)
+      color: '#374151'
     },    
     orderTotalAmount: {
       color: '#dc2626'
@@ -556,7 +555,7 @@ const MenuInteractivo = () => {
     },
     timeEstimateTitle: {
       fontWeight: 'bold',
-      color: '#374151' // 🔧 Añadido: mejor contraste
+      color: '#374151'
     },    
     timeEstimateText: {
       fontSize: '14px',
@@ -652,8 +651,8 @@ const MenuInteractivo = () => {
         <div style={styles.header}>
           <div style={styles.headerContent}>
             <div>
-              <h1 style={styles.headerTitle}>🍔 MenuMax</h1>
-              <p style={styles.headerSubtitle}>Ordena fácil, come delicioso</p>
+              <h1 style={styles.headerTitle}>🍔 ComidaMQTT</h1>
+              <p style={styles.headerSubtitle}>Ordena rápido como un mosquito</p>
             </div>
             <button
               onClick={() => setMostrarCarrito(!mostrarCarrito)}

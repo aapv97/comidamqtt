@@ -1,7 +1,6 @@
-// mqttClient.js
 import mqtt from 'mqtt';
 
-const topicEscucha = 'ordenes/status/mesa1'; // Tema para recibir cambios de estado
+const topicEscucha = 'ordenes/status/mesa1';
 const client = mqtt.connect('ws://localhost:9002', {
   clientId: `comensal_${Math.random().toString(16).substr(2, 8)}`,
   reconnectPeriod: 1000,

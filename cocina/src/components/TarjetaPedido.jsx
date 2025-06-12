@@ -14,7 +14,6 @@ const TarjetaPedido = ({ pedido }) => {
   const [enviando, setEnviando] = useState(false);
 
   useEffect(() => {
-    // sincroniza si el estado en base cambia
     if (pedido.estado && pedido.estado !== estadoActual) {
       setEstadoActual(pedido.estado);
       setIndiceEstado(estados.indexOf(pedido.estado));

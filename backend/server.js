@@ -8,7 +8,6 @@ dotenv.config();
 
 const app = express();
 
-// ✅ Configuración CORS
 app.use(cors({
   origin: '*',
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'OPTIONS'],
@@ -17,7 +16,7 @@ app.use(cors({
 
 app.use(express.json());
 
-// 🟢 Conexión MQTT (para uso dentro de Docker)
+// Conexión MQTT (para uso dentro de Docker)
 const mqttClient = mqtt.connect('mqtt://mqtt:1883');
 
 mqttClient.on('connect', () => {
@@ -40,13 +39,13 @@ mqttClient.on('message', (topic, message) => {
 export { mqttClient };
 
 
-// 📌 RUTAS API
+// RUTAS API
 
 app.get('/', (req, res) => {
   res.send('Servidor API funcionando 🍽️');
 });
 
-// GET: Obtener todos los pedidos
+// Obtener todos los pedidos con GET
 app.get('/api/pedidos', (req, res) => {
   connection.query('SELECT * FROM pedidos', (err, results) => {
     if (err) {
@@ -58,7 +57,7 @@ app.get('/api/pedidos', (req, res) => {
   });
 });
 
-// ✅ POST: Registrar nuevo pedido con estado inicial
+// Registrar nuevo pedido con estado inicial con POST
 app.post('/api/pedidos', (req, res) => {
   const productos = req.body.productos;
 
@@ -92,7 +91,7 @@ app.post('/api/pedidos', (req, res) => {
   );
 });
 
-// PUT: Actualizar el estado de un pedido por ID
+// Actualizar el estado de un pedido por ID con PUT
 app.put('/api/pedidos/:id', (req, res) => {
   const { id } = req.params;
   const { estado } = req.body;
@@ -115,8 +114,8 @@ app.put('/api/pedidos/:id', (req, res) => {
   );
 });
 
-// 🟢 Inicio del servidor
+// Inicio del servidor
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`🚀 Servidor escuchando en el puerto ${PORT}`);
+  console.log(`Servidor escuchando en el puerto ${PORT}`);
 });
